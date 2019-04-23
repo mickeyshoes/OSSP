@@ -12,7 +12,7 @@ static Scanner scan=new Scanner(System.in);
          for(int j = 0; j < num- (i + 1); j++) {
               System.out.print(" ");
      	}
-         for(int j=0; j<= 1 + 2 * i; j++) {
+         for(int j=0; j< 1 + 2 * i; j++) {
               System.out.print(str);
         }
      	 System.out.println();
