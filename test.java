@@ -7,12 +7,12 @@ public class test {
 	private int layer;// 변의 길이
 	private String shape;// 모양
 
-	public test(int layer, String shape){// 변의 길이와 모양을 입력받아 필드값으로 저장
+	public InvertTriangle(int layer, String shape){// 변의 길이와 모양을 입력받아 필드값으로 저장
 		this.layer = layer;
 		this.shape = shape;
 }
 
-	public void test() {
+	public void I_Triangle() {
 
 		for(int i = 1; i<=layer; i++) { // �����ڰ� �Է��� ������ ����
 			for(int j = 0; j<(i-1); j++) { //  n���� �ϳ��� �ٿ����� ��ĭ�� ����������
