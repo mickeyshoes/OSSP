@@ -7,7 +7,7 @@ public class test {
 	private int layer;// 변의 길이
 	private String shape;// 모양
 
-	public InvertTriangle(int layer, String shape){// 변의 길이와 모양을 입력받아 필드값으로 저장
+	public test(int layer, String shape){// 변의 길이와 모양을 입력받아 필드값으로 저장
 		this.layer = layer;
 		this.shape = shape;
 }
