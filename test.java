@@ -4,19 +4,19 @@ import java.util.Scanner;
 
 public class test {
 	static Scanner scan = new Scanner(System.in);
-
+	
 	public static void Inverted() {
-		System.out.print("ï¿½ï¿½ï¿½ï¿½ ï¿½ï°¢ï¿½ï¿½ Å©ï¿½ï¿½:");
-
-		int n = scan.nextInt();//ï¿½ï°¢ï¿½ï¿½ Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
-		String nemo = "ï¿½ï¿½";
-
-		for(int i = 1; i<=n; i++) { // ï¿½ï¿½ï¿½ï¿½ï¿½Ú°ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-			for(int j = 0; j<=(i-1); j++) { //  nï¿½ï¿½ï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½Ù¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		System.out.print("À§¿¡ »ï°¢Çü Å©±â:");
+		
+		int n = scan.nextInt();//»ï°¢Çü Å©±â °áÁ¤.
+		String nemo = "¡á";
+		
+		for(int i = 1; i<=n; i++) { // »ç¿ëÀÚ°¡ ÀÔ·ÂÇÑ ¼ö±îÁö Ãâ·Â
+			for(int j = 0; j<=(i-1); j++) { //  n°³¸¦ ÇÏ³ª¾¿ ÁÙ¿©°¡¸ç ÇÑÄ­¾¿ ¶ç¾îÁöµµ·Ï
 				System.out.print(" ");
 			}
-
-			for(int j=0; j<(2*n)-(2*i-1); j++) { //ï¿½Ô·Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½Ù¿ï¿½ï¿½ï¿½ï¿½é¼­ ï¿½ï¿½ï¿½ï¿½
+			
+			for(int j=0; j<(2*n)-(2*i-1); j++) { //ÀÔ·Â¼ö¿¡¼­ ÇÏ³ª¾¿ ÁÙ¿©°¡¸é¼­ Ãâ·Â
 				System.out.print(nemo);
 			}
 			System.out.println();
