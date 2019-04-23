@@ -1,5 +1,5 @@
-package forsubject; 
-import java.util.Scanner; 
+package forsubject;
+import java.util.Scanner;
 public class triangle {
 static Scanner scan=new Scanner(System.in);
 
@@ -15,6 +15,7 @@ static Scanner scan=new Scanner(System.in);
          for(int j=0; j< 1 + 2 * i; j++) {
               System.out.print(str);
         }
+
      	 System.out.println();
      }
     }
