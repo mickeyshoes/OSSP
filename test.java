@@ -3,20 +3,51 @@ package forsubject;
 import java.util.Scanner;
 
 public class test {
+	//static Scanner scan = new Scanner(System.in);
+	private int layer;// ë³€ì˜ ê¸¸ì´
+	private String shape;// ëª¨ì–‘
+
+	public InvertTriangle(int layer, String shape){// ë³€ì˜ ê¸¸ì´ì™€ ëª¨ì–‘ì„ ì…ë ¥ë°›ì•„ í•„ë“œê°’ìœ¼ë¡œ ì €ì¥
+		this.layer = layer;
+		this.shape = shape;
+}
+
+	public void test() {
+
+		for(int i = 1; i<=layer; i++) { // ï¿½ï¿½ï¿½ï¿½ï¿½Ú°ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			for(int j = 0; j<(i-1); j++) { //  nï¿½ï¿½ï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½Ù¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+				System.out.print("   ");
+			}
+
+			for(int j=0; j<(2*layer)-(2*i-1); j++) { //ï¿½Ô·Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½Ù¿ï¿½ï¿½ï¿½ï¿½é¼­ ï¿½ï¿½ï¿½ï¿½
+				System.out.print(shape);
+			}
+			if(i==layer) {
+				break;
+			}
+			else {
+				System.out.println("");
+			}
+		}
+	}
+
+}
+
+public class test {
 	static Scanner scan = new Scanner(System.in);
 	
 	public static void Inverted() {
-		System.out.print("À§¿¡ »ï°¢Çü Å©±â:");
+		System.out.print("ìœ„ì— ì‚¼ê°í˜• í¬ê¸°:");
 		
-		int n = scan.nextInt();//»ï°¢Çü Å©±â °áÁ¤.
-		String nemo = "¡á";
+		int n = scan.nextInt();//ì‚¼ê°í˜• í¬ê¸° ê²°ì •.
+		String nemo = "â– ";
 		
-		for(int i = 1; i<=n; i++) { // »ç¿ëÀÚ°¡ ÀÔ·ÂÇÑ ¼ö±îÁö Ãâ·Â
-			for(int j = 0; j<=(i-1); j++) { //  n°³¸¦ ÇÏ³ª¾¿ ÁÙ¿©°¡¸ç ÇÑÄ­¾¿ ¶ç¾îÁöµµ·Ï
+		for(int i = 1; i<=n; i++) { // ì‚¬ìš©ìê°€ ì…ë ¥í•œ ìˆ˜ê¹Œì§€ ì¶œë ¥
+			for(int j = 0; j<=(i-1); j++) { //  nê°œë¥¼ í•˜ë‚˜ì”© ì¤„ì—¬ê°€ë©° í•œì¹¸ì”© ë„ì–´ì§€ë„ë¡
 				System.out.print(" ");
 			}
 			
-			for(int j=0; j<(2*n)-(2*i-1); j++) { //ÀÔ·Â¼ö¿¡¼­ ÇÏ³ª¾¿ ÁÙ¿©°¡¸é¼­ Ãâ·Â
+			for(int j=0; j<(2*n)-(2*i-1); j++) { //ì…ë ¥ìˆ˜ì—ì„œ í•˜ë‚˜ì”© ì¤„ì—¬ê°€ë©´ì„œ ì¶œë ¥
 				System.out.print(nemo);
 			}
 			System.out.println();
