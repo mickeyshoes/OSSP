@@ -1,6 +1,6 @@
-/*ÀÏ½Ã : 19.04.23
- * °³¹ßÀÚ : ÀÓ¼º¹Î
- * °³¹ß¸ñÀû : ÀÌÁßÆ÷¹®À» »ç¿ëÇÑ ¸ğ¾ç ¸¸µé±â
+/*ì¼ì‹œ : 19.04.23
+ * ê°œë°œì : ì„ì„±ë¯¼
+ * ê°œë°œëª©ì  : ì´ì¤‘í¬ë¬¸ì„ ì‚¬ìš©í•œ ëª¨ì–‘ ë§Œë“¤ê¸°
  */
 package forsubject;
 import java.util.Scanner;
@@ -10,33 +10,33 @@ public class Operator{
       Scanner scan = new Scanner(System.in);
 
       while(true){
-        System.out.println("º°Âï±â ÇÁ·Î±×·¥");
-        System.out.println("1.¸¶¸§¸ğ 2.¸ğ·¡½Ã°è 3.Á¾·á");
-        int puts = scan.nextInt(); // ¸ğ¾ç¼±ÅÃÀ» ¹ŞÀ½
-        if(puts==3) { // 3¹ø ÀÔ·Â½Ã ¹İº¹¹® Å»Ãâ
-          System.out.println("»ç¿ëÇØÁÖ¼Å¼­ °¨»çÇÕ´Ï´Ù.");
+        System.out.println("ë³„ì°ê¸° í”„ë¡œê·¸ë¨");
+        System.out.println("1.ë§ˆë¦„ëª¨ 2.ëª¨ë˜ì‹œê³„ 3.ì¢…ë£Œ");
+        int puts = scan.nextInt(); // ëª¨ì–‘ì„ íƒì„ ë°›ìŒ
+        if(puts==3) { // 3ë²ˆ ì…ë ¥ì‹œ ë°˜ë³µë¬¸ íƒˆì¶œ
+          System.out.println("ì‚¬ìš©í•´ì£¼ì…”ì„œ ê°ì‚¬í•©ë‹ˆë‹¤.");
           break;
         }
-        System.out.println("ÇÑ º¯ÀÇ ±æÀÌ ÀÔ·Â :");
-        int layer = scan.nextInt(); // º¯ÀÇ ±æÀÌ ÀÔ·Â¹ŞÀ½
-        System.out.println("¸ğ¾ç ¼±ÅÃ");
-        System.out.println("1.¡Ú 2.¡Ù");
+        System.out.println("í•œ ë³€ì˜ ê¸¸ì´ ì…ë ¥ :");
+        int layer = scan.nextInt(); // ë³€ì˜ ê¸¸ì´ ì…ë ¥ë°›ìŒ
+        System.out.println("ëª¨ì–‘ ì„ íƒ");
+        System.out.println("1.â˜… 2.â˜†");
         int choose = scan.nextInt();
-        String shape; // »ç¿ëÀÚ°¡ °í¸¥ ¹®ÀÚ¸¦ »ı¼ºÀÚ »ı¼º½Ã ¸Å°³°ªÀ¸·Î ³Ñ°ÜÁÖ±â À§ÇÔ
+        String shape; // ì‚¬ìš©ìê°€ ê³ ë¥¸ ë¬¸ìë¥¼ ìƒì„±ì ìƒì„±ì‹œ ë§¤ê°œê°’ìœ¼ë¡œ ë„˜ê²¨ì£¼ê¸° ìœ„í•¨
         if(choose ==1){
-            shape = "¡Ú";
+            shape = "â˜…";
         }
           else{
-            shape = "¡Ù";
+            shape = "â˜†";
           }
-        Triangle tr = new Triangle(layer,shape);
-        InvertTriangle itr = new InvertTriangle(layer,shape);
+        triangle tr = new triangle(layer,shape);
+        test itr = new test(layer,shape);
 
-        if(puts ==1){ // À§»ï°¢Çü-¾Æ·¡»ï°¢Çü ¼øÀ¸·Î Ãâ·Â
+        if(puts ==1){ // ìœ„ì‚¼ê°í˜•-ì•„ë˜ì‚¼ê°í˜• ìˆœìœ¼ë¡œ ì¶œë ¥
           tr.Triangle_f();
           itr.I_Triangle();
         }
-        else if(puts==2){ // ¾Æ·¡»ï°¢Çü-À§»ï°¢Çü ¼øÀ¸·Î Ãâ·Â
+        else if(puts==2){ // ì•„ë˜ì‚¼ê°í˜•-ìœ„ì‚¼ê°í˜• ìˆœìœ¼ë¡œ ì¶œë ¥
           itr.I_Triangle();
           System.out.println("");
           tr.Triangle_f();
