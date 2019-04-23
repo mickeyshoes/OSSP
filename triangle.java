@@ -2,10 +2,10 @@ package forsubject;
 //import java.util.Scanner;
 public class Triangle {
 
-	private int layer;
-	private String shape;
+	private int layer; // 변의길이
+	private String shape; // 모양
 
-  public Triangle(int layer, String shape){
+  public Triangle(int layer, String shape){ // 변의길의와 모양을 입력받아 필드값으로 저장
 	     this.layer = layer;
 	     this.shape = shape;
 }
