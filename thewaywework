@@ -1,0 +1,36 @@
+기본 틀 구현 - 안드로이드 (개별적으로 알아야 할 사항)
+		(https://addio3305.tistory.com/88 // gui github)
+회원가입
+	정보 - 이름/성별/전화번호/이메일 ->(전화번호/이메일을(를) 인증을 하면 더 좋을것!) -> ★추가적인 개발방향
+	(정보 추가 기능 - 페북연동(?),화면인식)
+
+게시글 작성
+	정보 - 출발지/도착지/모이는 장소/제한시간/모인 인원수/게시자
+		(채팅 or 댓글?)
+	추가정보 - 거리에 대한 정보(km)/ 걸리는 시간 / 택시를 이용했을때 요금?/ 콜벤번호
+		  (네이버에서 검색한 결과를 가져옴//
+		    https://blog.naver.com/PostView.nhn?blogId=cosmosjs&logNo=221294678259&categoryNo=80&parentCategoryNo=0&viewDate=&currentPage=1&postListTopCurrentPage=1&from=postView)
+		
+서버 
+	게시글 작성 -> 추가정보 작업을 해야함
+	톰켓 서버(php? jsp? python?) or 웹서버(http)
+
+위치정보
+	구글 지도 및 도로명 주소로 위치 확인
+	(https://developer88.tistory.com/13)
+	현재위치 표시하기
+	(https://webnautes.tistory.com/1249)
+	
+데이터 베이스
+	mysql 사용
+
+		 
+
+참고자료
+
+http://mystudyroom.net/2017/12/25/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B83-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EB%B0%8F-%EC%84%9C%EB%B2%84-%EA%B5%AC%EC%B6%95/ // 데이터베이스 및 서버 구축	
+
+https://derveljunit.tistory.com/16 // 안드로이드의 데이터베이스 이용 / 웹서버
+
+	
+	
