@@ -1,28 +1,30 @@
 기본 틀 구현 - 안드로이드 (개별적으로 알아야 할 사항)
 		(https://addio3305.tistory.com/88 // gui github)
 회원가입
-	정보 - 이름/성별/전화번호/이메일 ->(전화번호/이메일을(를) 인증을 하면 더 좋을것!) -> ★추가적인 개발방향
+	정보 - ID/이름/비밀번호/비밀번호 확인/전화번호 ->(전화번호를 인증을 하면 더 좋을것!) -> ★추가적인 개발방향
 	(정보 추가 기능 - 페북연동(?),화면인식)
 
 게시글 작성
-	정보 - 출발지/도착지/모이는 장소/제한시간/모인 인원수/게시자
-		(채팅 or 댓글?)
+	정보 - 출발지/도착지/제한시간/모인 인원수/게시자
+		(댓글을 작성하는 방식)
 	추가정보 - 거리에 대한 정보(km)/ 걸리는 시간 / 택시를 이용했을때 요금?/ 콜벤번호
-		  (네이버에서 검색한 결과를 가져옴//
+		  (네이버 지도 API 사용//
+		    https://developers.naver.com/docs/map/android/
 		    https://blog.naver.com/PostView.nhn?blogId=cosmosjs&logNo=221294678259&categoryNo=80&parentCategoryNo=0&viewDate=&currentPage=1&postListTopCurrentPage=1&from=postView)
 		
+		- 답변형 게시판 댓글 (https://vkein.tistory.com/entry/%EB%8B%B5%EB%B3%80%ED%98%95-%EA%B2%8C%EC%8B%9C%ED%8C%90)
 서버 
 	게시글 작성 -> 추가정보 작업을 해야함
-	톰켓 서버(php? jsp? python?) or 웹서버(http)
+	
+	django(https://developer.mozilla.org/ko/docs/Learn/Server-side/Django/development_environment)
 
 위치정보
-	구글 지도 및 도로명 주소로 위치 확인
-	(https://developer88.tistory.com/13)
-	현재위치 표시하기
-	(https://webnautes.tistory.com/1249)
+	네이버 지도 API 사용//
+	https://euns2ol.tistory.com/11 // 연동
+	https://navermaps.github.io/maps.js.ncp/docs/tutorial-1-marker-simple.example.html // 마커표시
 	
 데이터 베이스
-	mysql 사용
+	mysql 사용(https://blog.naver.com/hj_veronica/220541570147)
 
 		 
 

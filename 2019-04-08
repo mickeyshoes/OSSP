@@ -1,7 +1,0 @@
-Today we do not GIT Server & Source Code & Atom stop to do.
-#include <stdio.h>
-void main(){
-  printf("2019-04-08");
-  printf("\n");
-  getch();
-}
