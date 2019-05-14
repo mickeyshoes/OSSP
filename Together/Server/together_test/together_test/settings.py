@@ -75,8 +75,15 @@ WSGI_APPLICATION = 'together_test.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'together_database',
+        'USER': 'gohomie',
+        'PASSWORD': 'qwerty',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'OPTIONS': { # 올바르지 않은 데이터가 입력되었을때, 오류를 일으키며 데이터가 입력되지 않음
+            'init_command': 'SET sql_mode="STRICT_TRANS_TABLES"'
+        }
     }
 }
 
@@ -105,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
