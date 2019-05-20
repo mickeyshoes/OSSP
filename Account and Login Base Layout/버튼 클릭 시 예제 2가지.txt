@@ -1,0 +1,110 @@
+=========================================================
+=========================================================
+1) 버튼을 선언하고 리스너를 선언 
+
+// (( app -> java -> com.example.myapplication -> MainActivity ))
+// onCreate() 내부에 해야됨.
+        // case 1
+        final Button btn_1 = (Button) findViewById(R.id.btnDeleteFavorite);
+        btn_1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent browserIntent =
+                        new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
+                startActivity(browserIntent);
+            }
+        });
+
+// (( app -> res -> drawable 에 resource file 에 .xml 생성(button_notibar_didit.xml)
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle" >
+    <corners
+        android:radius="5dp"
+        />
+    <solid
+        android:color="#800000"
+        />
+    <padding
+        android:left="0dp"
+        android:top="0dp"
+        android:right="0dp"
+        android:bottom="0dp"
+        />
+    <size
+        android:width="60dp"
+        android:height="25dp"
+        />
+    <stroke
+        android:width="1dp"
+        android:color="#FFFCFC"
+        />
+</shape>
+
+// (( app -> res -> layout -> activity_main.xml ))
+// case 1
+    <Button
+        android:id="@+id/btnDeleteFavorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_notibar_didit"
+        android:text="string/msg_ok_favorite"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        tools:layout_editor_absoluteX="127dp"
+        tools:layout_editor_absoluteY="140dp" />
+
+
+
+
+
+
+
+
+=========================================================
+=========================================================
+2) XML에 메소드를 선언하고 java에서 선언하는 방법
+
+
+// onCreate() 외부에 해야됨.
+public void sign_in_click(View v) {
+        Intent browserIntent =
+                new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.naver.com"));
+        startActivity(browserIntent);
+    }
+
+
+// (( app -> res -> drawable 에 resource file 에 .xml 생성(login_button.xml)
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle" >
+    <corners
+        android:radius="5dp"
+        />
+    <solid
+        android:color="#FFFFFF"
+        />
+    <size
+        android:width="100dp"
+        android:height="39dp"
+        />
+</shape>
+
+
+// onClick="java 에 함수 이름과 같아야 함"
+<Button
+        android:id="@+id/login_btn"
+        android:layout_width="100dp"
+        android:layout_height="39dp"
+        android:background="@drawable/login_button"
+        android:onClick="sign_in_click"
+        android:text="Sign in"
+        android:textColor="#000000"
+        android:textSize="13sp"
+        tools:layout_editor_absoluteX="257dp"
+        tools:layout_editor_absoluteY="606dp" />
+
+
+
+
+
+
+
+

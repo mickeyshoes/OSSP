@@ -1,0 +1,80 @@
+https://coding-factory.tistory.com/203
+https://m.blog.naver.com/eominsuk55/220226226633
+https://blog.naver.com/eominsuk55/220227937851
+
+===================================================
+(1) 액티비티 추가.
+(( app -> java -> com.example.myapplication ))
+자바 클래스 추가하기. (SubActivity)
+
+public class SubActivity extends Activity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+}
+액티비티 기본 구조..
+
+===================================================
+(2) 레이아웃 추가
+(( app -> res -> layout ))
+레이아웃 추가하기. (subactivity_layout.xml)
+
+===================================================
+(3) 액티비티로 돌아가서 setContentView 메서드로 아까 만든 레이아웃 파일과 액티비티를 연결합니다.
+ setContentView(R.layout.subactivity_layout);
+
+===================================================
+(4) 액티비티를 AndroidManifest.xml에 등록하지 않으면 존재 자체가 없는 걸로  간주 됨.
+(( app -> manifests -> AndroidManifest.xml 에서 ))
+MainActivity의 액티비티 끝나는 부분 다음에 추가하기.
+
+<activity android:name=".SubActivity"/> 추가.
+
+===================================================
+액티비티와 액티비티 사이를 이동할 땐 '인텐트(Intent)'라는 것을 사용.
+
+(5) MainActivity 에서 SubActivity 액티비티에 대한 인텐트를 추가.
+
+생성자의 첫번째 인자에는 액티비티 자기 자신을 (this).
+액티비티 안의 이너 or 익명 클래스 속에서 인텐트를 생성할 때는 this 대신 MainActivity.this 를 사용하여 이것이 메인 액티비티 임을 명시해야 함.
+
+두번째 인자에는 이동할 액티비티의 클래스 오브젝트를 전달함.
+클래스 오브젝트는 '클래스명.class' 형태로 작성.
+
+그 다음 액티비티의 startActivity 메서드를 호출하고 위에서 만든 인텐트를 넣어줌.
+
+Intent intent = new Intent(this, SubActivity.class);
+startActivity(intent);
+
+위의 코드를 OnCreate() 안에 넣으면 실행되자마자 실행되기 때문에...
+어떤 버튼을 클릭하고 이동하려면 그 버튼의 onclick 안에 넣으면 됨.
+
+===================================================
+(6) 마지막으로 다른 액티비티에 이동이 된 상태에서 뒤로가기 버튼을 누르면
+전 상태로 가기위한 함수는 finish(); 로 버튼을 onclick 할 때 finish(); 를 넣으면 됨.
+
+
+
+
+
+
+
+===================================================
+===================================================
+===================================================
+===================================================
+===================================================
+===================================================
+
+새로운 액티비티를 추가안하고 레이아웃만 추가하고 MainActivity에서만 다른 레이아웃 불러올 때
+버튼을 onclick 하면 레이아웃 이동할 때.
+(1) 레이아웃 추가.(sub_activity.xml) (버튼 추가)
+
+(2) MainActivity.xml 에서 어떤 버튼의 onClick 이벤트에
+setContentView(R.layout.sub_activity); 를 추가.
+
+ex)
+	public void button2click(View v){
+		setContentView(R.layout.sub_activity);
+	}
