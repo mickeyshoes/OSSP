@@ -149,6 +149,27 @@ def add_user(request):
     else:
         return HttpResponse(1)
 
+def check_id(request):
+    inputID = 'helloworld'
+
+    try:
+        con = pymysql.connect(host='localhost', user='gohomie', password='qwerty', db='together_database', charset='utf8')
+        curs = con.cursor()
+        sql = 'select UID from userinfo where UID = %s'
+        curs.execute(sql,inputID)
+
+        datas = curs.fetchone()
+        print_datas = datas
+    finally:
+        con.close()
+    
+    if(print_datas == None):
+        print('cannot find duplicated id')
+        return HttpResponse(1)
+    else:
+        print('already existed')
+        return HttpResponse(0)
+
 #def change_pw(request):
 
     

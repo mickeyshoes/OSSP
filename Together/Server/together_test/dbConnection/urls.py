@@ -10,4 +10,5 @@ urlpatterns = [
     path('find_id', views.find_id),
     path('find_pw', views.find_pw),
     path('add_user', views.add_user),
+    path('check_id', views.check_id),
 ]
