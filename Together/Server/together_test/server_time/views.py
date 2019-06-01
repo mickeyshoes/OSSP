@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.utils import timezone
+from django.views.decorators.csrf import csrf_exempt
 import pymysql
 from mysql.connector import Error, errorcode
 
-
+@csrf_exempt
 def index(request):
     nowp = timezone.localtime(timezone.now() + timezone.timedelta(hours=21)).strftime('%Y-%m-%d-%H-%M-%S')
     print(nowp)
@@ -14,6 +15,7 @@ def index(request):
     print(type(nowpp))
     return HttpResponse(now)
 
+@csrf_exempt
 def insert_time(request):
     now = timezone.localtime(timezone.now()).strftime('%Y-%m-%d-%H:%M:%S')
     errornum =1
@@ -40,6 +42,7 @@ def insert_time(request):
         print('insert error')
         return HttpResponse(0)
 
+@csrf_exempt
 def insert_time_plus_1(request) :
     nowp = timezone.localtime(timezone.now() + timezone.timedelta(hours=2)).strftime('%Y-%m-%d-%H-%M-%S')
     errornum =1
@@ -66,7 +69,7 @@ def insert_time_plus_1(request) :
         print('insert error')
         return HttpResponse(0)
     
-
+@csrf_exempt
 def pick_time_remain(request):
     now = timezone.localtime(timezone.now())
     errornum =1
