@@ -7,6 +7,7 @@ import mysql.connector
 from mysql.connector import Error
 from mysql.connector import errorcode
 import json
+import datetime
 
 # Create your views here.
 
@@ -30,8 +31,8 @@ def request_test(request):
 #입력받은 정보로 로그인을 시도한다
 @csrf_exempt
 def app_login(request):
-    UserID = "helloworld1"
-    UserPW = "1335"
+    UserID = request.POST.get('UserID', '')
+    UserPW = request.POST.get('UserPW', '')
     login_success = 0 #error가 생기면 0을 리턴
 
     try:
@@ -137,6 +138,7 @@ def add_user(request):
     except con.Error as error :
         con.rollback()
         print('error inserting record into mysql')
+        print(error)
         errornum = 0
         
     finally: 
@@ -227,12 +229,53 @@ def write_post(request):
         print('posting insertion is fail ;0;')
         return HttpResponse(0)
 
+
+def select_post(request):
+    select_post = 4
+
+    try:
+        con =pymysql.connect(host='localhost', user='gohomie', password='qwerty', db='together_database', charset='utf8')
+        curs = con.cursor(pymysql.cursors.DictCursor)
+        sql = 'select * from posting where Pnum = %s'
+        curs.execute(sql,int(select_post))
+
+        datas = curs.fetchall()
+        json_data = json.dumps(datas, default = json_datetime, ensure_ascii=False)
+        print(type(datas))
+        print(datas)
+        print(len(datas))
+        print(type(json_data))
+        print(json_data)
+        
+    
+    except con.Error as error:
+        con.rollback()
+        print('Mysql has an error :')
+        print(error)
+    
+    finally:
+        con.close()
+    
+    if len(datas) == 0 :
+        print('There is no item in database')
+        return HttpResponse(0)
+
+    else:
+        return HttpResponse(json_data)
+
 @csrf_exempt
 def test_connect(request):
     datas = json.loads(request.body)
-    return HttpResponse(datas)
-    
+    keys = list(datas.keys())
+    print(datas)
+    print(type(keys))
+    print(datas.get(keys[0]))
+    return HttpResponse(str(datas))
 
+#데이터베이스에서 가져온 datetime type을 json타입으로 변환    
+def json_datetime(value):
+    if isinstance(value,datetime.datetime):
+        return value.strftime('%Y-%m-%d-%H:%M:%S')
 
 
     

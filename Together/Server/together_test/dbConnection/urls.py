@@ -12,4 +12,5 @@ urlpatterns = [
     path('write_post', views.write_post),
     path('existed_post', views.existed_post),
     path('test_connect', views.test_connect),
+    path('select_post', views.select_post),
 ]
