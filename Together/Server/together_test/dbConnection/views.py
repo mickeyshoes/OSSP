@@ -76,13 +76,13 @@ def app_login(request):
 #입력받은 정보를 통해 등록된 ID를 조회한다.
 @csrf_exempt
 def find_id(request):
-    userName = '김덕배'
-    userTel = '002-4435-3322'
+    UserName = request.POST.get('UserName', '')
+    UserTel = request.POST.get('UserTel', '')
     try:
         con = pymysql.connect(host='localhost', user='gohomie', password='qwerty', db='together_database', charset='utf8')
         curs = con.cursor()
         sql = 'select UID from userinfo where UName =%s and UTel =%s'
-        curs.execute(sql,(userName, userTel))
+        curs.execute(sql,(UserName, UserTel))
 
         datas = curs.fetchone()
         print_datas = datas
@@ -99,13 +99,13 @@ def find_id(request):
 #입력받은 정보를 통해 해당 ID의 비밀번호를 조회한다.
 @csrf_exempt
 def find_pw(request):
-    userid = "helloworld"
-    usertel = "002-4435-3322"
+    UserID = request.POST.get('UserID', '')
+    UserTel = request.POST.get('UserTel', '')
     try:
         con = pymysql.connect(host='localhost', user='gohomie', password='qwerty', db='together_database', charset='utf8')
         curs = con.cursor()
         sql = 'select UPw from userinfo where UID =%s and UTel =%s'
-        curs.execute(sql,(userid, usertel))
+        curs.execute(sql,(UserID, UserTel))
 
         datas = curs.fetchone()
         print_datas = datas
@@ -121,10 +121,10 @@ def find_pw(request):
 #입력받은 사용자의 개인정보를 데이터베이스에 저장
 @csrf_exempt
 def add_user(request):
-    input_uid = 'and_phy'
-    input_upw = '1357'
-    input_uname = '김구글'
-    input_utel ='041-224-2234'
+    input_uid = request.POST.get('UserID', '')
+    input_upw = request.POST.get('UserPW', '')
+    input_uname = request.POST.get('UserName', '')
+    input_utel = request.POST.get('UserTel', '')
     errornum = 0 #error가 생기면 값을 0으로 바꾸고 0을 리턴
 
     try:
@@ -152,7 +152,7 @@ def add_user(request):
 #입력받은 사용자의 아이디가 데이터베이스에 이미 등록되어 있는지 확인
 @csrf_exempt
 def check_id(request):
-    inputID = 'helloworld1'
+    inputID = request.POST.get('UserID', '')
 
     try:
         con = pymysql.connect(host='localhost', user='gohomie', password='qwerty', db='together_database', charset='utf8')
@@ -196,13 +196,13 @@ def existed_post(request):
 #데이터베이스에 사용자가 입력한 게시글 삽입
 @csrf_exempt
 def write_post(request):
-    user_id = 'helloworld'
-    user_write_content = '뭘 이렇게 많이 적었누'
+    user_id = request.POST.get('UserID', '')
+    user_write_content = request.POST.get('UserWrite', '')
     user_posttime = timezone.localtime(timezone.now()).strftime('%Y-%m-%d-%H:%M:%S')
     user_validtime = timezone.localtime(timezone.now() + timezone.timedelta(hours=1)).strftime('%Y-%m-%d-%H-%M-%S')
-    user_departure = '아산역'
-    user_arrival = '천안역'
-    user_limit = 4
+    user_departure = request.POST.get('UserDeparture', '')
+    user_arrival = request.POST.get('UserArrival', '')
+    user_limit = request.POST.get('UserLimit', '')
     errornum = 0
 
     try:
@@ -231,7 +231,7 @@ def write_post(request):
 
 
 def select_post(request):
-    select_post = 4
+    select_post = request.POST.get('SelectPost', '')
 
     try:
         con =pymysql.connect(host='localhost', user='gohomie', password='qwerty', db='together_database', charset='utf8')

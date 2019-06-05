@@ -68,7 +68,8 @@ def insert_time_plus_1(request) :
     else:
         print('insert error')
         return HttpResponse(0)
-    
+        
+#현재시간보다 유효시간이 더 큰 게시글에 대한 정보를 가져올 것    
 @csrf_exempt
 def pick_time_remain(request):
     now = timezone.localtime(timezone.now())
