@@ -222,14 +222,15 @@ def write_post(request):
     finally:
         con.close()
 
-    if(errornum ==1):
+    if errornum ==1:
         print('posting insertion is complete !')
         return HttpResponse(1)
     else:
         print('posting insertion is fail ;0;')
         return HttpResponse(0)
 
-
+#선택된 게시글에 대한 정보 출력
+@csrf_exempt
 def select_post(request):
     select_post = request.POST.get('SelectPost', '')
 
@@ -262,6 +263,94 @@ def select_post(request):
 
     else:
         return HttpResponse(json_data)
+
+#작성한 댓글을 데이터베이스에 저장
+@csrf_exempt
+def write_comment(request):
+    comment_posting_num = 1
+    comment_id = 'helloworld'
+    comment_about = '지금 바로 가시나요??'
+    now = timezone.localtime(timezone.now()).strftime('%Y-%m-%d-%H:%M:%S')
+    errornum = 0
+
+    try:
+        con =pymysql.connect(host='localhost', user='gohomie', password='qwerty', db='together_database', charset='utf8')
+        curs = con.cursor()
+        sql = 'insert into comment values (%s,%s,%s,%s)'
+        curs.execute(sql,(comment_posting_num,comment_id,now,comment_about))
+        con.commit()
+        errornum = 1
+
+    except con.Error as error :
+        con.rollback()
+        print('insert error in comment table')
+        print(error)
+
+    finally:
+        con.close()
+
+    if errornum == 1 :
+        print('commit complete !')
+        return HttpResponse(1)
+    else:
+        print('commit fail in comment table')
+        return HttpResponse(0)    
+
+#작성했던 댓글을 삭제한다.
+@csrf_exempt
+def delete_comment(request):
+    commented_num = 1
+    comment_id = 'helloworld'
+    comment_time = '2019-06-06-00:02:16'
+    print_time = datetime.datetime.strptime(comment_time, '%Y-%m-%d-%H:%M:%S')
+    errornum = 0
+
+    try:
+        con = pymysql.connect(host='localhost', user='gohomie', password='qwerty', db='together_database', charset='utf8')
+        curs = con.cursor()
+        sql ='delete from comment where CID = %s and CNum = %s and CTime = %s'
+        curs.execute(sql, (comment_id, int(commented_num), print_time))
+        if curs.rowcount == 1:
+            errornum =1
+        con.commit()
+        
+    except con.Error as error:
+        con.rollback()
+        print('tuples cannot delete')
+        print(error)
+    
+    finally:
+        con.close()
+
+    if errornum == 1:
+        print('delete transection is success')
+        return HttpResponse(1)
+    else:
+        print('delete transection is fail')
+        return HttpResponse(0)
+
+#해당 게시글에 작성된 댓글을 가져온다.
+@csrf_exempt
+def existed_comment(request):
+    commented_num = 1
+
+    try:
+        con = pymysql.connect(host='localhost', user='gohomie', password='qwerty', db='together_database', charset='utf8')
+        curs = con.cursor(pymysql.cursors.DictCursor)
+        sql ='select * from comment where CNum = %s'
+        curs.execute(sql,(commented_num))
+        datas = curs.fetchall()
+        
+    finally:
+        con.close()
+
+    if len(datas) != 0:
+        print('select datas are success!')
+        json_datas = json.dumps(datas, default= json_datetime, ensure_ascii=False)
+        return HttpResponse(json_datas)
+    else:
+        print('there are none datas in your input conditions')
+        return HttpResponse(0)
 
 @csrf_exempt
 def test_connect(request):

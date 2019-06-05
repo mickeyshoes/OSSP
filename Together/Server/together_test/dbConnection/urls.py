@@ -13,4 +13,7 @@ urlpatterns = [
     path('existed_post', views.existed_post),
     path('test_connect', views.test_connect),
     path('select_post', views.select_post),
+    path('write_comment', views.write_comment),
+    path('delete_comment',views.delete_comment),
+    path('existed_comment', views.existed_comment),
 ]
