@@ -183,6 +183,7 @@ def existed_post(request):
         sql ='select * from posting where PValidtime > %s'
         curs.execute(sql, now)
         datas = curs.fetchall()
+        json_data = json.dumps(datas, default = json_datetime, ensure_ascii=False)
     
     finally:
         con.close()
@@ -190,8 +191,11 @@ def existed_post(request):
     if datas is None:
         print('there is no valid data in database')
         return HttpResponse(0)
+    elif len(datas) == 0:
+        print('there is no valid data in database')
+        return HttpResponse(0)
     else:
-        return HttpResponse(datas)
+        return HttpResponse(json_data)
 
 #데이터베이스에 사용자가 입력한 게시글 삽입
 @csrf_exempt
@@ -212,6 +216,13 @@ def write_post(request):
         curs.execute(sql, (user_id, user_write_content, user_posttime, user_validtime, user_departure, user_arrival, int(user_limit)))
         con.commit()
         errornum = 1
+        sql ='select PNum from posting where PID = %s and PAbout = %s'
+        curs.execute(sql, (user_id, user_write_content))
+        post_data = curs.fetchone()
+        sql = 'insert into joingroup values (%s, %s)'
+        curs.execute(sql, (int(post_data[0]),user_id))
+        con.commit()
+        errornum = 2
     
     except con.Error as error :
         con.rollback()
@@ -222,7 +233,7 @@ def write_post(request):
     finally:
         con.close()
 
-    if errornum ==1:
+    if errornum ==2:
         print('posting insertion is complete !')
         return HttpResponse(1)
     else:
@@ -232,23 +243,23 @@ def write_post(request):
 #선택된 게시글에 대한 정보 출력
 @csrf_exempt
 def select_post(request):
-    select_post = request.POST.get('SelectPost', '')
+    select_post = request.POST.get('SelectPost', '') 
+    now = timezone.localtime(timezone.now()).strftime('%Y-%m-%d-%H:%M:%S')
 
     try:
         con =pymysql.connect(host='localhost', user='gohomie', password='qwerty', db='together_database', charset='utf8')
         curs = con.cursor(pymysql.cursors.DictCursor)
-        sql = 'select * from posting where Pnum = %s'
-        curs.execute(sql,int(select_post))
+        sql = 'select * from posting where Pnum = %s and PValidtime > %s'
+        curs.execute(sql,(int(select_post),now))
 
-        datas = curs.fetchall()
+        datas = curs.fetchone()
         json_data = json.dumps(datas, default = json_datetime, ensure_ascii=False)
-        print(type(datas))
+        '''print(type(datas))
         print(datas)
         print(len(datas))
         print(type(json_data))
-        print(json_data)
+        print(json_data)'''
         
-    
     except con.Error as error:
         con.rollback()
         print('Mysql has an error :')
@@ -257,19 +268,54 @@ def select_post(request):
     finally:
         con.close()
     
-    if len(datas) == 0 :
+    if datas is None:
+        print('There is no item in database')
+        return HttpResponse(0)
+
+    elif len(datas) == 0:
         print('There is no item in database')
         return HttpResponse(0)
 
     else:
         return HttpResponse(json_data)
 
+#작성한 게시글 중 유효시간이 남아있는 게시글을 삭제
+@csrf_exempt
+def delete_post(request):
+    now = timezone.localtime(timezone.now()).strftime('%Y-%m-%d-%H:%M:%S')
+    user_id = request.POST.get('userid', '')
+    errornum = 0
+    try:
+        con =pymysql.connect(host='localhost', user='gohomie', password='qwerty', db='together_database', charset='utf8')
+        curs = con.cursor()
+        sql = 'delete from posting where PID = %s and Pvalidtime > %s'
+        curs.execute(sql,(user_id,now))
+        print(curs.rowcount)
+        if curs.rowcount == 1:
+            errornum =1
+        con.commit()
+
+    except con.Error as error:
+        con.rollback()
+        print('delete error in mysql')
+        print(error)
+
+    finally:
+        con.close()
+
+    if errornum == 1:
+        print('delete success !')
+        return HttpResponse(1)
+    else:
+        print('delete fail ;.;')
+        return HttpResponse(0)
+
 #작성한 댓글을 데이터베이스에 저장
 @csrf_exempt
 def write_comment(request):
-    comment_posting_num = 1
-    comment_id = 'helloworld'
-    comment_about = '지금 바로 가시나요??'
+    comment_posting_num = request.POST.get('postNum', '')
+    comment_id = request.POST.get('commentID', '')
+    comment_about = request.POST.get('commentAbout', '')
     now = timezone.localtime(timezone.now()).strftime('%Y-%m-%d-%H:%M:%S')
     errornum = 0
 
@@ -299,17 +345,16 @@ def write_comment(request):
 #작성했던 댓글을 삭제한다.
 @csrf_exempt
 def delete_comment(request):
-    commented_num = 1
-    comment_id = 'helloworld'
-    comment_time = '2019-06-06-00:02:16'
-    print_time = datetime.datetime.strptime(comment_time, '%Y-%m-%d-%H:%M:%S')
+    commented_num = request.POST.get('commentNum', '')
+    comment_id = request.POST.get('commentID', '')
+    comment_time = request.POST.get('commentTime', '')
     errornum = 0
 
     try:
         con = pymysql.connect(host='localhost', user='gohomie', password='qwerty', db='together_database', charset='utf8')
         curs = con.cursor()
         sql ='delete from comment where CID = %s and CNum = %s and CTime = %s'
-        curs.execute(sql, (comment_id, int(commented_num), print_time))
+        curs.execute(sql, (comment_id, int(commented_num), comment_time))
         if curs.rowcount == 1:
             errornum =1
         con.commit()
@@ -332,7 +377,7 @@ def delete_comment(request):
 #해당 게시글에 작성된 댓글을 가져온다.
 @csrf_exempt
 def existed_comment(request):
-    commented_num = 1
+    commented_num = request.POST.get('commentNum', '')
 
     try:
         con = pymysql.connect(host='localhost', user='gohomie', password='qwerty', db='together_database', charset='utf8')
@@ -352,6 +397,107 @@ def existed_comment(request):
         print('there are none datas in your input conditions')
         return HttpResponse(0)
 
+#1번을 넣어오면 그룹에 참여한 인원수, 2번을 넣어오면 그룹에 포함되어 있는 인원 출력
+@csrf_exempt
+def count_join_member(request):
+
+    join_group = request.POST.get('PNum', '')
+    select_num = request.POST.get('SelectNum', '')
+    sql=''
+
+    try:
+        con = pymysql.connect(host='localhost', user='gohomie', password='qwerty', db='together_database', charset='utf8')
+        if select_num == 1:
+            curs = con.cursor()
+            sql = 'select COUNT(JNum) from joingroup where JNum = %s'
+        elif select_num == 2:
+            curs = con.cursor(pymysql.cursors.DictCursor)
+            sql = 'select JID from joingroup where JNum = %s'
+        else:
+            print('error in sql select')
+            return HttpResponse(0)
+        
+        curs.execute(sql, int(join_group))
+        datas = curs.fetchall()
+
+    except con.Error as error:
+        print(error)
+
+    finally:
+        con.close()
+
+    if len(datas) == 0 :
+        print('cannot find datas in joingroup')
+        return HttpResponse(0)
+    else:
+        if select_num == 1: #반환이 tuple 이다.
+            print('select in joingroup is success')
+            datas = list(datas)
+            print(type(datas[0]))
+            return HttpResponse(datas[0])
+
+        else:
+            print('select in joingroup is success')
+            return HttpResponse(datas)
+
+#사용자가 선택한 그룹에 참여하는 경우
+@csrf_exempt
+def join_group(request):
+    post_number = request.POST.get('PNum', '')
+    user_id = request.POST.get('UID', '')
+    now = timezone.localtime(timezone.now()).strftime('%Y-%m-%d-%H:%M:%S')
+    errornum = 0
+
+    try:
+        con = pymysql.connect(host='localhost', user='gohomie', password='qwerty', db='together_database', charset='utf8')
+        curs = con.cursor()
+        sql = 'select PNum from posting where PNum = %s and PValidtime > %s'
+        curs.execute(sql,(int(post_number), now))
+        post_data = curs.fetchone()
+
+        if post_data is None:
+            print('This post is not available that you clicked to participate')
+            return HttpResponse(4) # 참여하고자 한 게시글이 유효시간을 벗어난경우
+        else:
+            sql = 'select JID from joingroup where JNum in (select PNum from posting where PValidtime > %s) and JID = %s'
+            curs.execute(sql, (now, user_id))
+            join_data = curs.fetchone()
+
+            if join_data is not None:
+                print('You are already existed another group ')
+                return HttpResponse(3) # 다른 게시글에 이미 참여가 되어 있는경우
+            else:
+                sql = 'select COUNT(JNum) from joingroup where JNum = %s'
+                curs.execute(sql, (int(post_number)))
+                count_num = curs.fetchone()
+                sql = 'select PLimit from posting where PNum = %s'
+                curs.execute(sql, (int(post_number)))
+                limit_num = curs.fetchone()
+
+                if count_num[0] >= limit_num[0] :
+                    print('A group that you chosen is full')
+                    return HttpResponse(2) # 선택한 그룹이 가득 찬 경우
+                else:
+                    sql = 'insert into joingroup values (%s, %s)'
+                    curs.execute(sql, (int(post_number), user_id))
+                    con.commit()
+                    errornum =1
+
+    except con.Error as error :
+        con.rollback()
+        print('error in sql insert')
+        print(error)
+
+    finally:
+        con.close()
+
+    if errornum ==1 :
+        print('insert success')
+        return HttpResponse(1)
+    else:
+        print('insert fail')
+        return HttpResponse(0)
+    
 @csrf_exempt
 def test_connect(request):
     datas = json.loads(request.body)
