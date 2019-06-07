@@ -17,6 +17,7 @@ urlpatterns = [
     path('delete_comment',views.delete_comment), # 댓글 삭제
     path('existed_comment', views.existed_comment), # 특정 게시글에 작성된 댓글
     path('delete_post', views.delete_post), # 게시글 삭제
-    path('count_join_member', views.count_join_member), #게시글에 참여한 인원 수 및 참여한 회원 확인
+    path('count_join_member', views.count_join_member), #게시글(그룹)에 참여한 인원 수 및 참여한 회원 확인
     path('join_group', views.join_group), # 선택한 그룹에 참여하는 경우
+    path('leave_group', views.leave_group), # 참여했던 그룹에서 나오는 경우
 ]

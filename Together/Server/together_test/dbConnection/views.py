@@ -54,13 +54,13 @@ def app_login(request):
 
             if pw_datas is None:
                 print('pw is not same')
-                login_success = 0
+                login_success = 2
             elif UserPW == pw_datas[0]:
                 print('id and pw are same')
                 login_success = 1
             else:
                 print('pw is not same')
-                login_success = 0
+                login_success = 2
 
     finally: 
         con.close()
@@ -71,8 +71,13 @@ def app_login(request):
     
     else:
         print('login fail')
-        return HttpResponse(0)
-
+        if login_success == 2:
+            print('pw is not same')
+            return HttpResponse(2)
+        else:
+            print('cannot find id')
+            return HttpResponse(0)
+        
 #입력받은 정보를 통해 등록된 ID를 조회한다.
 @csrf_exempt
 def find_id(request):
@@ -497,7 +502,36 @@ def join_group(request):
     else:
         print('insert fail')
         return HttpResponse(0)
+
+#참여햇던 그룹에서 나오는 경우
+@csrf_exempt
+def leave_group(request):
+    selected_group = 5
+    selected_ID = 'kikikim'
+
+    try:
+        con = pymysql.connect(host='localhost', user='gohomie', password='qwerty', db='together_database', charset='utf8')
+        curs = con.cursor()
+        sql = 'delete from joingroup where JNum = %s and JID = %s'
+        curs.execute(sql, (int(selected_group), selected_ID))
+        con.commit()
     
+    except con.Error as error:
+        con.rollback()
+        print('There is an error during delete trasection')
+        print(error)
+    
+    finally:
+        con.close()
+    
+    if curs.rowcount == 1:
+        print('delete success !')
+        return HttpResponse(1)
+    else:
+        print('delete fail')
+        return HttpResponse(0)
+
+
 @csrf_exempt
 def test_connect(request):
     datas = json.loads(request.body)
