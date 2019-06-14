@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="6"
+    tools:context=".Posting_masterActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:weightSum="4"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/TextView_Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:text="제목: " />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="2"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/TextView_departure"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="출발지"
+                android:textSize="25sp"
+                android:layout_weight="0.4"
+                />
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:weightSum="3"
+                tools:layout_editor_absoluteX="172dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center"
+
+                    android:src="@drawable/iconfinder_arrow"
+                    tools:ignore="MissingConstraints"
+                    tools:layout_editor_absoluteX="0dp"
+                    tools:layout_editor_absoluteY="47dp" />
+            </android.support.constraint.ConstraintLayout>
+            <TextView
+                android:id="@+id/TextView_arrival"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="목적지"
+                android:textSize="25sp"
+                android:layout_weight="0.4"
+                />
+            </LinearLayout>
+
+        <TextView
+            android:id="@+id/TextView_person"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:text="제한인원" />
+
+        <TextView
+            android:id="@+id/TextView_memo"
+            android:layout_width="match_parent"
+            android:layout_height="66dp" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/ListView_chat"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_weight="4"
+        android:divider="#000000" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentLeft="true">
+
+        <EditText
+            android:id="@+id/EditText_chat"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="댓글을 입력하세요." />
+
+        <Button
+            android:id="@+id/Button_send"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="전송" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1.2">
+
+        <Button
+            android:id="@+id/Button_final"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="완료"
+            android:layout_weight="0.5"/>
+
+    </LinearLayout>
+</LinearLayout>

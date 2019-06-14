@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/LinearLayout_posting"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".PostingActivity"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <com.naver.maps.map.MapView
+            android:id="@+id/map_view"
+            android:layout_width="match_parent"
+            android:layout_height="228dp"
+            android:layout_marginBottom="5dp"
+            app:navermap_latitude="36.799218"
+            app:navermap_longitude="127.074920">
+
+            <com.naver.maps.map.widget.ZoomControlView
+                android:id="@+id/ZoomControlView_zoom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:layout_margin="12dp" />
+            <com.naver.maps.map.widget.LocationButtonView
+                android:id="@+id/navermap_location_button"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="100dp"
+                />
+        </com.naver.maps.map.MapView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+
+            <EditText
+                android:id="@+id/EditText_memo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:gravity="top|start"
+                android:hint="Memo" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="5"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            >
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/TextInputLayout_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                >
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/TextInputEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Title"
+                    />
+            </android.support.design.widget.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:text="제목을 입력해주세요.">
+
+            </LinearLayout>
+
+            <RadioGroup
+                android:id="@+id/RadioGroup_departure"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:weightSum="5"
+                android:layout_marginBottom="20dp">
+                <RadioButton
+                    android:id="@+id/RadioButton_departuresunmoon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="선문대"
+                    android:layout_weight="1"
+                    />
+                <RadioButton
+                    android:id="@+id/RadioButton_departuretasan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="아산역"
+                    android:layout_weight="1"
+                    />
+                <RadioButton
+                    android:id="@+id/RadioButton_departurecheonan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="천안역"
+                    android:layout_weight="1"
+                    />
+                <RadioButton
+                    android:id="@+id/RadioButton_departureterminal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="터미널"
+                    android:layout_weight="1"
+                    />
+                <RadioButton
+                    android:id="@+id/RadioButton_departuretra"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="트라"
+                    android:layout_weight="1"
+                    />
+            </RadioGroup>
+
+            <RadioGroup
+                android:id="@+id/RadioGroup_arrival"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:weightSum="5"
+                android:layout_marginBottom="20dp">
+                <RadioButton
+                    android:id="@+id/RadioButton_arrivalsunmoon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="선문대"
+                    android:layout_weight="1"
+                    />
+                <RadioButton
+                    android:id="@+id/RadioButton_arrivalasan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="아산역"
+                    android:layout_weight="1"
+                    />
+                <RadioButton
+                    android:id="@+id/RadioButton_arrivalcheonan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="천안역"
+                    android:layout_weight="1"
+                    />
+
+                <RadioButton
+                    android:id="@+id/RadioButton_arrivalterminal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="터미널" />
+                <RadioButton
+                    android:id="@+id/RadioButton_arrivaltra"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="트라"
+                    android:layout_weight="1"
+                    />
+            </RadioGroup>
+
+            <RadioGroup
+                android:id="@+id/RadioGroup_person"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:weightSum="3"
+                android:layout_marginBottom="40dp">
+                <RadioButton
+                    android:id="@+id/RadioButton_one"
+                    android:text="1명"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textColor="#ffffff"
+                    android:gravity="center_vertical"
+                    android:button="@drawable/iconfinder_person"
+                    />
+
+                <RadioButton
+                    android:id="@+id/RadioButton_two"
+                    android:text="2명"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textColor="#ffffff"
+                    android:button="@drawable/iconfinder_twopeople"
+                    android:gravity="center_vertical" />
+
+                <RadioButton
+                    android:id="@+id/RadioButton_three"
+                    android:text="3명"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textColor="#ffffff"
+                    android:button="@drawable/iconfinder_three"
+                    android:gravity="center_vertical" />
+            </RadioGroup>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:weightSum="1"
+                >
+                <Button
+                    android:id="@+id/Button_join"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:text="join" />
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:src="@drawable/iconfinder_postarrow"/>
+                <Button
+                    android:id="@+id/Button_save"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_red"
+                    android:text="Save"
+                    android:textColor="#ffffff" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
