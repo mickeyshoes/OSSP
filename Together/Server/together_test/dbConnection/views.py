@@ -185,11 +185,13 @@ def existed_post(request):
     try:
         con = pymysql.connect(host='localhost', user='gohomie', password='qwerty', db='together_database', charset='utf8')
         curs = con.cursor(pymysql.cursors.DictCursor)
-        sql ='select * from posting where PValidtime > %s'
+        #curs = con.cursor()
+        sql ='select * from posting where PValidtime < %s'
         curs.execute(sql, now)
         datas = curs.fetchall()
+        print(datas)
         json_data = json.dumps(datas, default = json_datetime, ensure_ascii=False)
-    
+
     finally:
         con.close()
 
