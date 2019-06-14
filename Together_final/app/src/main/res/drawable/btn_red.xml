@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_enabled="true">
+        <shape>
+            <!--색상 정의-->
+            <solid android:color="@color/colorPrimary">
+
+            </solid>
+            <!--버튼 모서리 둥근 정도 설정.-->
+            <corners android:radius="25dp">
+
+            </corners>
+        </shape>
+    </item>
+
+    <!--눌렀을 색 변경-->
+    <item android:state_pressed="true">
+        <shape>
+            <solid android:color="#FF0000">
+
+            </solid>
+            <corners android:radius="25dp">
+
+            </corners>
+        </shape>
+    </item>
+</selector>
