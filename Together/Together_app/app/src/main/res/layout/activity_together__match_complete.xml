@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_weight="1"
+    tools:context=".Together_MatchComplete">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/iconfinder_person_location"
+        tools:ignore="MissingConstraints"
+        android:layout_marginBottom="30dp"/>
+
+    <TextView
+        android:id="@+id/group_member"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thank you for your day!"
+        android:gravity="center"
+        android:textSize="30sp"
+        />
+
+    <LinearLayout
+        android:id="@+id/Taxi"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="30dp">
+
+        <TextView
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Taxi"
+            android:textSize="30sp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:src="@drawable/iconfinder_taxi" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/CallBan"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="50dp">
+
+        <TextView
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Callvan"
+            android:textSize="30sp"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:src="@drawable/iconfinder_bus"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Ladder_Game"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="50dp">
+
+        <TextView
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Ladder_Game"
+            android:textSize="30sp"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:background="@null"
+            android:src="@drawable/iconfinder_ladder"/>
+    </LinearLayout>
+
+</LinearLayout>

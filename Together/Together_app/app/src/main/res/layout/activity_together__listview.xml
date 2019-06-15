@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:orientation="vertical"
+    tools:context=".Together_Listview"
+    android:weightSum="5"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_weight="4"
+        android:weightSum="4"
+        android:layout_marginBottom="20dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/Departure"
+            android:text="출발지"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:layout_marginRight="30dp"
+            android:gravity="center"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/Arrival"
+            android:text="목적지"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:layout_marginRight="30dp"
+            android:gravity="center"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/count"
+            android:text="현재인원/제한인원"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:layout_marginLeft="15dp">
+
+            <Button
+                android:id="@+id/refreshbtn"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_vertical"
+                android:text="참여삭제" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"></ListView>
+
+    <Button
+        android:id="@+id/inputbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="글 작성"/>
+
+</LinearLayout>

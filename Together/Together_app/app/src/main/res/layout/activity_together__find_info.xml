@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Together_FindInfo">
+
+    <TextView
+        android:id="@+id/IDtextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="300dp"
+        android:text="ID 찾기\n\n"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@id/Teltext01"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <EditText
+        android:id="@+id/Nametext01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="NAME"
+        android:ems="10"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:privateImeOptions="defaultInputmode=korean"
+        app:layout_constraintTop_toTopOf="@id/IDtextView"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/Teltext01"/>
+
+    <EditText
+        android:id="@+id/Teltext01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:hint="TEL(xxx-xxxx-xxxx 입력)"
+        android:ems="10"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        app:layout_constraintBottom_toTopOf="@id/FindIDBtn"
+        app:layout_constraintTop_toBottomOf="@id/Nametext01"/>
+
+    <Button
+        android:id="@+id/FindIDBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="150dp"
+        android:layout_marginBottom="220dp"
+        android:text="FIND ID"
+        android:shadowColor="@color/colorPrimaryDark"
+        android:background="@drawable/background_round"
+        app:layout_constraintTop_toTopOf="@id/Nametext01"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <TextView
+        android:id="@+id/PWtextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PASSWORD 찾기\n\n"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="190dp"
+        android:textSize="20dp"
+        app:layout_constraintTop_toBottomOf="@id/FindIDBtn"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/Teltext02"/>
+
+    <EditText
+        android:id="@+id/IDtext01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="ID"
+        android:ems="10"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        app:layout_constraintTop_toTopOf="@id/PWtextView"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/Teltext02"/>
+
+    <EditText
+        android:id="@+id/Teltext02"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:hint="TEL"
+        android:ems="10"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintTop_toBottomOf="@id/IDtext01"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/FindPWBtn"/>
+
+    <Button
+        android:id="@+id/FindPWBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="150dp"
+        android:layout_marginBottom="15dp"
+        android:text="FIND PW"
+        android:shadowColor="@color/colorPrimaryDark"
+        android:background="@drawable/background_round"
+        app:layout_constraintTop_toTopOf="@id/Teltext02"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>

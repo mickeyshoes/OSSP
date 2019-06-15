@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:weightSum="3">
+
+    <TextView
+        android:id="@+id/TextView_ID"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="아이디 : "
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/TextView_Chat"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="chatting / "
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/TextView_date"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="date"
+        android:layout_weight="1"
+        android:layout_gravity="right"
+        android:gravity="right"
+        />
+
+</LinearLayout>
