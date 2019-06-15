@@ -21,4 +21,6 @@ urlpatterns = [
     path('join_group', views.join_group), # 선택한 그룹에 참여하는 경우
     path('leave_group', views.leave_group), # 참여했던 그룹에서 나오는 경우
     path('find_postnum', views.find_postnum),
+    path('change_validtime', views.change_validtime),
+    path('check_tel', views.check_tel),
 ]

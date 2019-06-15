@@ -177,6 +177,31 @@ def check_id(request):
         print('already existed')
         return HttpResponse(0)
 
+#입력받은 사용자의 전화번호가 데이터베이스에 이미 등록되어 있는지 확인
+@csrf_exempt
+def check_tel(request):
+    inputTel = request.POST.get('UserTel', '')
+
+    try:
+        con = pymysql.connect(host='localhost', user='gohomie', password='qwerty', db='together_database', charset='utf8')
+        curs = con.cursor()
+        sql = 'select Utel from userinfo where Utel = %s'
+        curs.execute(sql,inputTel)
+
+        datas = curs.fetchone()
+        print_datas = datas
+        print(datas)
+
+    finally:
+        con.close()
+    
+    if print_datas is None:
+        print('cannot find duplicated telephone number')
+        return HttpResponse(1)
+    else:
+        print('already existed')
+        return HttpResponse(0)
+
 #작성된 게시글들 중에서 유효한 게시글들만 가져옴(dictonary type)
 @csrf_exempt
 def existed_post(request):
@@ -186,7 +211,7 @@ def existed_post(request):
         con = pymysql.connect(host='localhost', user='gohomie', password='qwerty', db='together_database', charset='utf8')
         curs = con.cursor(pymysql.cursors.DictCursor)
         #curs = con.cursor()
-        sql ='select * from posting where PValidtime < %s order by PValidtime asc'
+        sql ='select * from posting where PValidtime > %s order by PValidtime asc'
         curs.execute(sql, now)
         datas = curs.fetchall()
         print(datas)
@@ -223,17 +248,25 @@ def write_post(request):
     try:
         con = pymysql.connect(host='localhost', user='gohomie', password='qwerty', db='together_database', charset='utf8')
         curs = con.cursor()
-        sql = 'insert into posting(PID, PAbout, PPosttime, PValidtime, PDeparture, PArrival, PLimit) values (%s,%s,%s,%s,%s,%s,%s)'
-        curs.execute(sql, (user_id, user_write_content, user_posttime, user_validtime, user_departure, user_arrival, int(user_limit)))
-        con.commit()
-        errornum = 1
-        sql ='select PNum from posting where PID = %s and PAbout = %s'
-        curs.execute(sql, (user_id, user_write_content))
-        post_data = curs.fetchone()
-        sql = 'insert into joingroup values (%s, %s)'
-        curs.execute(sql, (int(post_data[0]),user_id))
-        con.commit()
-        errornum = 2
+        sql = 'select count(PID) from posting where PValidtime > %s and PID = %s'
+        curs.execute(sql, (user_posttime, user_id))
+        datas =curs.fetchone()
+        if datas[0]!=0 :
+            print('already exist in your posting')
+            return HttpResponse(4)
+
+        else:
+            sql = 'insert into posting(PID, PAbout, PPosttime, PValidtime, PDeparture, PArrival, PLimit) values (%s,%s,%s,%s,%s,%s,%s)'
+            curs.execute(sql, (user_id, user_write_content, user_posttime, user_validtime, user_departure, user_arrival, int(user_limit)))
+            con.commit()
+            errornum = 1
+            sql ='select PNum from posting where PID = %s and PAbout = %s'
+            curs.execute(sql, (user_id, user_write_content))
+            post_data = curs.fetchone()
+            sql = 'insert into joingroup values (%s, %s)'
+            curs.execute(sql, (int(post_data[0]),user_id))
+            con.commit()
+            errornum = 2
     
     except con.Error as error :
         con.rollback()
@@ -260,7 +293,7 @@ def select_post(request):
     try:
         con =pymysql.connect(host='localhost', user='gohomie', password='qwerty', db='together_database', charset='utf8')
         curs = con.cursor(pymysql.cursors.DictCursor)
-        sql = 'select * from posting where Pnum = %s and PValidtime < %s'
+        sql = 'select * from posting where Pnum = %s and PValidtime > %s'
         curs.execute(sql,(int(select_post),now))
 
         datas = curs.fetchone()
@@ -468,6 +501,7 @@ def count_join_member(request):
         datas = curs.fetchall()
 
     except con.Error as error:
+        con.rollback()
         print(error)
 
     finally:
@@ -485,7 +519,35 @@ def count_join_member(request):
 
         else:
             print('select in joingroup is success')
-            return HttpResponse(datas)
+            json_datas = json.dumps(datas)
+            return HttpResponse(json_datas)
+
+@csrf_exempt
+#그룹핑이 완료된 게시글의 유효시간을 현재시간으로 삽입하여 다른 사용자가 조회할 수 없게 함
+def change_validtime(request):
+    post_number = request.POST.get('Pnum', '')
+    now = timezone.localtime(timezone.now()).strftime('%Y-%m-%d-%H:%M:%S')
+
+    try:
+        con = pymysql.connect(host='localhost', user='gohomie', password='qwerty', db='together_database', charset='utf8')
+        curs = con.cursor()
+        sql= 'update posting set PValidtime = %s where PNum = %s'
+        curs.execute(sql,(now, int(post_number)))
+        con.commit()
+    
+    except con.Error as error:
+        con.rollback()
+        print('update has an error. please check')
+        print(error)
+    
+    finally:
+        con.close()
+
+    if curs.rowcount == 1:
+        print('update success !')
+        return HttpResponse(1)
+    else:
+        return HttpResponse(0)
 
 #사용자가 선택한 그룹에 참여하는 경우
 @csrf_exempt
@@ -542,21 +604,50 @@ def join_group(request):
         print('insert success')
         return HttpResponse(1)
     else:
-        print('insert fail')
+        print('you are already join this post')
         return HttpResponse(0)
 
 #참여햇던 그룹에서 나오는 경우
 @csrf_exempt
 def leave_group(request):
-    selected_group = 5
-    selected_ID = 'kikikim'
+    selected_ID = request.POST.get('login_ID', '')
+    now = timezone.localtime(timezone.now()).strftime('%Y-%m-%d-%H:%M:%S')
 
     try:
         con = pymysql.connect(host='localhost', user='gohomie', password='qwerty', db='together_database', charset='utf8')
         curs = con.cursor()
-        sql = 'delete from joingroup where JNum = %s and JID = %s'
-        curs.execute(sql, (int(selected_group), selected_ID))
-        con.commit()
+        sql = 'select JID from joingroup where JNum in (Select Pnum from posting where PValidtime > %s and PID = %s) and JID = %s'
+        curs.execute(sql, (now, selected_ID, selected_ID))
+        datas = curs.fetchone()
+        if datas is not None:
+            sql = 'delete from posting where PID = %s and PValidtime > %s'
+            curs.execute(sql, (selected_ID, now))
+            if curs.rowcount ==1:
+                print('join and posting delete complete')
+                con.commit()
+                return HttpResponse(1)
+            else:
+                print('posting is not valid')
+                return HttpResponse(2)
+        else:
+            sql = 'select JID from joingroup where JNum in (Select Pnum from posting where PValidtime > %s) and JID = %s'
+            curs.execute(sql, (now, selected_ID))
+            datas = curs.fetchone()
+
+            if datas is not None:
+                sql = 'select JNum from joingroup where JNum in (Select Pnum from posting where PValidtime > %s) and JID = %s'
+                curs.execute(sql, (now, selected_ID))
+                join_number = curs.fetchone()
+                if join_number is None:
+                    print('group validtime is over')
+                    return HttpResponse(2)
+                else:
+                    sql = 'delete from joingroup where JNum = %s and JID = %s'
+                    curs.execute(sql, (join_number[0], selected_ID))
+                    con.commit()
+            else:
+                print('you do not have any group')
+                return HttpResponse(3)
     
     except con.Error as error:
         con.rollback()
