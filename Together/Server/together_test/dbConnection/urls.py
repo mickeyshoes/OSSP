@@ -20,4 +20,5 @@ urlpatterns = [
     path('count_join_member', views.count_join_member), #게시글(그룹)에 참여한 인원 수 및 참여한 회원 확인
     path('join_group', views.join_group), # 선택한 그룹에 참여하는 경우
     path('leave_group', views.leave_group), # 참여했던 그룹에서 나오는 경우
+    path('find_postnum', views.find_postnum),
 ]

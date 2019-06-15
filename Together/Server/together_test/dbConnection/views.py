@@ -186,7 +186,7 @@ def existed_post(request):
         con = pymysql.connect(host='localhost', user='gohomie', password='qwerty', db='together_database', charset='utf8')
         curs = con.cursor(pymysql.cursors.DictCursor)
         #curs = con.cursor()
-        sql ='select * from posting where PValidtime < %s'
+        sql ='select * from posting where PValidtime < %s order by PValidtime asc'
         curs.execute(sql, now)
         datas = curs.fetchall()
         print(datas)
@@ -215,6 +215,10 @@ def write_post(request):
     user_arrival = request.POST.get('UserArrival', '')
     user_limit = request.POST.get('UserLimit', '')
     errornum = 0
+    
+    print(user_id)
+    print(user_departure)
+    print(user_arrival)
 
     try:
         con = pymysql.connect(host='localhost', user='gohomie', password='qwerty', db='together_database', charset='utf8')
@@ -242,7 +246,7 @@ def write_post(request):
 
     if errornum ==2:
         print('posting insertion is complete !')
-        return HttpResponse(1)
+        return HttpResponse(post_data[0])
     else:
         print('posting insertion is fail ;0;')
         return HttpResponse(0)
@@ -256,7 +260,7 @@ def select_post(request):
     try:
         con =pymysql.connect(host='localhost', user='gohomie', password='qwerty', db='together_database', charset='utf8')
         curs = con.cursor(pymysql.cursors.DictCursor)
-        sql = 'select * from posting where Pnum = %s and PValidtime > %s'
+        sql = 'select * from posting where Pnum = %s and PValidtime < %s'
         curs.execute(sql,(int(select_post),now))
 
         datas = curs.fetchone()
@@ -284,6 +288,7 @@ def select_post(request):
         return HttpResponse(0)
 
     else:
+        print(json_data)
         return HttpResponse(json_data)
 
 #작성한 게시글 중 유효시간이 남아있는 게시글을 삭제
@@ -317,6 +322,39 @@ def delete_post(request):
         print('delete fail ;.;')
         return HttpResponse(0)
 
+@csrf_exempt
+#아이디와 입력값으로 특정 게시글의 게시글번호를 알아냄
+def find_postnum(request):
+    posting_id = request.POST.get('login_ID', '')
+    posting_about = request.POST.get('Postabout', '')
+
+    try:
+        con =pymysql.connect(host='localhost', user='gohomie', password='qwerty', db='together_database', charset='utf8')
+        curs = con.cursor()
+        sql = 'select PNum from posting where PID = %s and pabout = %s'
+        curs.execute(sql,(posting_id, posting_about))
+        
+        datas = curs.fetchone()
+    
+    except con.Error as error:
+        con.rollback()
+        print('select has an error')
+        print(error)
+    
+    finally:
+        con.close()
+    
+    if datas is None:
+        print('cannot find datas')
+        return HttpResponse(0)
+    
+    elif len(datas) == 0:
+        print('cannot find datas')
+        return HttpResponse(0)
+
+    else:
+        return HttpResponse(datas)
+
 #작성한 댓글을 데이터베이스에 저장
 @csrf_exempt
 def write_comment(request):
@@ -330,7 +368,7 @@ def write_comment(request):
         con =pymysql.connect(host='localhost', user='gohomie', password='qwerty', db='together_database', charset='utf8')
         curs = con.cursor()
         sql = 'insert into comment values (%s,%s,%s,%s)'
-        curs.execute(sql,(comment_posting_num,comment_id,now,comment_about))
+        curs.execute(sql,(int(comment_posting_num),comment_id,now,comment_about))
         con.commit()
         errornum = 1
 
@@ -344,7 +382,7 @@ def write_comment(request):
 
     if errornum == 1 :
         print('commit complete !')
-        return HttpResponse(1)
+        return HttpResponse(now)
     else:
         print('commit fail in comment table')
         return HttpResponse(0)    
@@ -389,8 +427,8 @@ def existed_comment(request):
     try:
         con = pymysql.connect(host='localhost', user='gohomie', password='qwerty', db='together_database', charset='utf8')
         curs = con.cursor(pymysql.cursors.DictCursor)
-        sql ='select * from comment where CNum = %s'
-        curs.execute(sql,(commented_num))
+        sql ='select * from comment where CNum = %s order by CTime'
+        curs.execute(sql,(int(commented_num)))
         datas = curs.fetchall()
         
     finally:
@@ -412,12 +450,14 @@ def count_join_member(request):
     select_num = request.POST.get('SelectNum', '')
     sql=''
 
+    int_select = int(select_num)
+
     try:
         con = pymysql.connect(host='localhost', user='gohomie', password='qwerty', db='together_database', charset='utf8')
-        if select_num == 1:
+        if int_select == 1:
             curs = con.cursor()
             sql = 'select COUNT(JNum) from joingroup where JNum = %s'
-        elif select_num == 2:
+        elif int_select == 2:
             curs = con.cursor(pymysql.cursors.DictCursor)
             sql = 'select JID from joingroup where JNum = %s'
         else:
@@ -437,7 +477,7 @@ def count_join_member(request):
         print('cannot find datas in joingroup')
         return HttpResponse(0)
     else:
-        if select_num == 1: #반환이 tuple 이다.
+        if int_select == 1: #반환이 tuple 이다.
             print('select in joingroup is success')
             datas = list(datas)
             print(type(datas[0]))
