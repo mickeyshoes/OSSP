@@ -1,4 +1,4 @@
-Android Studio version 8.0
+Android version 8.0
 
 자세한 코드 설명은 주석으로 모두 설명하였습니다.
 
@@ -17,7 +17,7 @@ Together 사용서
 7. 완료버튼 후 콜택시 번호, 콜밴 전화, 사다리 게임을 할 수 있는 버튼으로 자유롭게 이동수단 및 비용 나누기를 할 수 있음.
 
 개발에 사용한 언어 및 툴
-Android, Java, Xml, Python, Django, Mysql
+Android Studio 3.3, Visual Studio Code 1.35.1 , Java, Xml, Python, Django, Mysql
 
 Android Studio
 
