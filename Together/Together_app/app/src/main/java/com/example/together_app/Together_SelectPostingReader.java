@@ -148,19 +148,19 @@ public class Together_SelectPostingReader extends AppCompatActivity {
                     String inputURL = url_make.make_url();
                     String possibility = new JoinGroup().execute(inputURL, access_post, login_ID).get();
                     Log.e("possibility",possibility);
-                    if(possibility.equals(0)){
+                    if(possibility.equals("0")){
                         Toast.makeText(getApplicationContext(), "이미 해당그룹에 참여중입니다.", Toast.LENGTH_SHORT).show();
                     }
-                    else if(possibility.equals(1)){
+                    else if(possibility.equals("1")){
                         Toast.makeText(getApplicationContext(), "참여성공! 댓글을 통하여 장소를 정하세요.", Toast.LENGTH_LONG).show();
                     }
-                    else if(possibility.equals(2)){
+                    else if(possibility.equals("2")){
                         Toast.makeText(getApplicationContext(), "선택하신 게시글의 인원이 가득합니다. :(", Toast.LENGTH_SHORT).show();
                     }
-                    else if(possibility.equals(3)){
+                    else if(possibility.equals("3")){
                         Toast.makeText(getApplicationContext(), "한번에 한개의 게시글에만 참여가능 합니다.", Toast.LENGTH_SHORT).show();
                     }
-                    else if(possibility.equals(4)){
+                    else if(possibility.equals("4")){
                         Toast.makeText(getApplicationContext(), "게시글 게시시간이 지나서 참여할 수 없습니다.", Toast.LENGTH_SHORT).show();
                     }
                 } catch (ExecutionException e) {
