@@ -166,6 +166,7 @@ public class Together_Posting extends Activity implements OnMapReadyCallback {
                     Toast.makeText(getApplicationContext(), "제한인원을 설정해주세요", Toast.LENGTH_SHORT).show();
                 }
                 else {
+                    // 입력된 게시글에 문제가 없으면 서버에 입력한 값을 저장하고 저장된 결과를 사용자에게 반환한다.
                     try {
                         URL_make make_url = new URL_make("write_post");
                         String urlInput = make_url.make_url();
@@ -459,6 +460,7 @@ public class Together_Posting extends Activity implements OnMapReadyCallback {
 
                     cameraUpdate = CameraUpdate.scrollTo(new LatLng(36.820818, 127.156362)).animate(CameraAnimation.Easing);
 
+                    //목적에 해당되는 장소 클릭시 카메라 전환
                     CameraUpdate finalCameraUpdate = cameraUpdate;
                     mapView.getMapAsync(naverMap1 -> {
                         naverMap1.moveCamera((finalCameraUpdate));
@@ -473,19 +475,23 @@ public class Together_Posting extends Activity implements OnMapReadyCallback {
                 if (i == R.id.RadioButton_one) {
                     person = ((RadioButton) findViewById(R.id.RadioButton_one)).getText().toString();
                     person_join = ((RadioButton) findViewById(R.id.RadioButton_one)).getText().toString();
+                    Toast.makeText(getApplicationContext(), "1명 선택", Toast.LENGTH_LONG).show();
                 }
                 else if (i == R.id.RadioButton_two) {
                     person = ((RadioButton) findViewById(R.id.RadioButton_two)).getText().toString();
                     person_join = ((RadioButton) findViewById(R.id.RadioButton_two)).getText().toString();
+                    Toast.makeText(getApplicationContext(), "2명 선택", Toast.LENGTH_LONG).show();
                 }
                 else if (i == R.id.RadioButton_three) {
                     person = ((RadioButton) findViewById(R.id.RadioButton_three)).getText().toString();
                     person_join = ((RadioButton) findViewById(R.id.RadioButton_three)).getText().toString();
+                    Toast.makeText(getApplicationContext(), "3명 선택", Toast.LENGTH_LONG).show();
                 }
             }
         }
     };
 
+    // 네이버 지도를 띄우는 callback 함수
     @UiThread
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
@@ -493,27 +499,27 @@ public class Together_Posting extends Activity implements OnMapReadyCallback {
         marker.setPosition(new LatLng(36.799218, 127.074920));
 
         marker.setOnClickListener(overlay -> { //마크 클릭시 출발지 목적지 선택 가능하도록.
-            Toast.makeText(getApplicationContext(), "선문대학교클릭",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "선문대학교",Toast.LENGTH_SHORT).show();
             return true;
         });
         marker1.setPosition(new LatLng(36.809299, 127.146593));
         marker1.setOnClickListener(overlay -> { //마크 클릭시 출발지 목적지 선택 가능하도록.
-            Toast.makeText(getApplicationContext(), "천안역클릭",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "천안역",Toast.LENGTH_SHORT).show();
             return true;
         });
         marker2.setPosition(new LatLng(36.792171, 127.104496));
         marker2.setOnClickListener(overlay -> { //마크 클릭시 출발지 목적지 선택 가능하도록.
-            Toast.makeText(getApplicationContext(), "아산역클릭",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "아산역",Toast.LENGTH_SHORT).show();
             return true;
         });
         marker3.setPosition(new LatLng(36.798487, 127.060894));
         marker3.setOnClickListener(overlay -> { //마크 클릭시 출발지 목적지 선택 가능하도록.
-            Toast.makeText(getApplicationContext(), "트라팰리스클릭",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "트라팰리스",Toast.LENGTH_SHORT).show();
             return true;
         });
         marker4.setPosition(new LatLng(36.820818, 127.156362));
         marker4.setOnClickListener(overlay -> { //마크 클릭시 출발지 목적지 선택 가능하도록.
-            Toast.makeText(getApplicationContext(), "천안터미널클릭",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "천안터미널",Toast.LENGTH_SHORT).show();
             return true;
         });
 
@@ -526,6 +532,7 @@ public class Together_Posting extends Activity implements OnMapReadyCallback {
 
     }
 
+    //사용자가 입력한 값을 서버에 저장
     public class DoPosting extends AsyncTask<String, Void, String> {
 
         @Override
@@ -582,6 +589,7 @@ public class Together_Posting extends Activity implements OnMapReadyCallback {
 
     }
 
+    //사용자가 입력한 게시글의 내용으로 작성한 게시글의 번호를 알아옴(기본키 찾기)
     public class FindPostNum extends AsyncTask<String, Void, String> {
 
         @Override

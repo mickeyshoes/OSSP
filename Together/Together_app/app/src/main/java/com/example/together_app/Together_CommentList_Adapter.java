@@ -1,3 +1,6 @@
+/*
+* 개발자 - 박건형
+* 개발목적 - 댓글목록의 댓글을 아이템별로 적용시킬 어댑터 생성*/
 package com.example.together_app;
 
 import android.content.Context;

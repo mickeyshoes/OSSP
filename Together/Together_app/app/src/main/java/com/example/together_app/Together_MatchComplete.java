@@ -1,3 +1,7 @@
+/*
+* 개발자 - 임성민, 박건형
+* 개발목적 - 최종 그룹이 맺어진 게시자가 최종적으로 확인 할 수 있는 액티비티
+*            콜벤, 택시번호 조회와 사다리타기 기능을 확인 할 수 있다.*/
 package com.example.together_app;
 
 import android.content.Intent;
@@ -52,7 +56,8 @@ public class Together_MatchComplete extends AppCompatActivity {
             URL_make make_url = new URL_make("change_validtime");
             String change_time = make_url.make_url();
             String change_result = new ValidtimeChange().execute(change_time, access_post).get();
-            if(change_result == "1"){ // 입력값 확인 손봐야한다.//
+            //서버에서 받아온 결과값에 대한 동작
+            if(change_result != "0"){
 
                 URL_make url_make = new URL_make("count_join_member");
                 String urlInput = url_make.make_url();
@@ -84,7 +89,7 @@ public class Together_MatchComplete extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
+        //택시에 관한 정보
         Taxi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,7 +116,7 @@ public class Together_MatchComplete extends AppCompatActivity {
             }
         });
     }
-
+    // 그룹이 맺어진 게시글의 유효시간을 변경하여 다른 사용자가 완료된 게시글에 접근하지 못하게 유효시간을 현재시간으로 변경
     public class ValidtimeChange extends AsyncTask<String, Void, String> {
 
         @Override
@@ -157,7 +162,7 @@ public class Together_MatchComplete extends AppCompatActivity {
             return output.toString();
         }
     }
-
+    // 그룹에 참여된 사람들의 목록을 받아옴.
     public class getJoinNumber extends AsyncTask<String, Void, String> {
 
         @Override

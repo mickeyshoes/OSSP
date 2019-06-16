@@ -1,3 +1,6 @@
+/*
+* 개발자 - 박건형
+* 개발목적 - 게시글에 대한 정보가 담길 객체 정의*/
 package com.example.together_app;
 
 public class Together_Listview_PostingItem {

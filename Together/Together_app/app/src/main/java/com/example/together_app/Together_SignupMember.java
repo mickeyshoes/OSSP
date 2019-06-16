@@ -58,7 +58,7 @@ public class Together_SignupMember extends AppCompatActivity {
                     inputURL2 = url_make1.make_url();
                     telcheck = new duplicateTelCheck().execute(inputURL2, tel).get();
 
-
+                    // 사용자가 값을 제대로 입력했는지 조건을 주어 확인
                     if(name.length()==0 || id.length()==0 || pw.length()==0 || pw2.length()==0 || tel.length()==0){
                         Toast.makeText(getApplicationContext(), "값을 입력해주세요.",Toast.LENGTH_SHORT).show();
                     }
@@ -75,6 +75,7 @@ public class Together_SignupMember extends AppCompatActivity {
                         telInput.setText("");
                     }
                     else{
+                        //사용자가 값을 제대로 입력하면 서버에 정보 전송 및 결과 출력
                         URL_make url_make2 = new URL_make("add_user");
                         String urls = url_make2.make_url();
                         String result = new SignUpMember().execute(urls,id,pw,name,tel).get();

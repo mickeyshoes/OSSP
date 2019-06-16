@@ -1,3 +1,6 @@
+/*
+* 개발자 - 임성민, 박건형
+* 개발목적 - 게시글 출력 및 그룹참여 해제*/
 package com.example.together_app;
 
 import android.content.Intent;
@@ -88,13 +91,14 @@ public class Together_Listview extends AppCompatActivity {
 
         existed_posting_list();
 
+        //각각의 게시글이 클릭되었을때 일어날 행동 정의
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), postingItems.get(position).getPNum(), Toast.LENGTH_SHORT).show();
                 String access_post = postingItems.get(position).getPNum();
                 String name = postingItems.get(position).getPID();
                 Log.e("id match", "intent id = "+login_ID+" item id ="+name);
+                // 로그인 아이디와 게시글 작성자 아이디가 같으면 작성자 화면의 게시글로 이동
                 if(login_ID.equals(name)){
                     Intent intent1 = new Intent(getApplicationContext(), Together_SelectPostingWriter.class);
                     intent1.putExtra("login_ID",login_ID);
@@ -105,6 +109,7 @@ public class Together_Listview extends AppCompatActivity {
                     intent1.putExtra("plimit", postingItems.get(position).getPLimit());
                     startActivity(intent1);
                 }
+                // 로그인 아이디와 게시글 작성자 아이디가 다르면 게시글 화면으로 이동
                 else{
                     Intent intent2 = new Intent(getApplicationContext(), Together_SelectPostingReader.class);
                     intent2.putExtra("login_ID",login_ID);
@@ -141,7 +146,7 @@ public class Together_Listview extends AppCompatActivity {
         }
 
     }
-
+    // 현재시간에 비교하여 유효시간이 아직 남은 게시글을 출력
     public class showValidPost extends AsyncTask<String, Void, String> {
 
         @Override
@@ -180,7 +185,7 @@ public class Together_Listview extends AppCompatActivity {
             return output.toString();
         }
     }
-
+    // 그룹에 참여되어 있으나 다른 그룹에 참여하고 싶거나 그룹을 나가고 싶을때 실행
     public class DeleteJoin extends AsyncTask<String, Void, String> {
 
         @Override

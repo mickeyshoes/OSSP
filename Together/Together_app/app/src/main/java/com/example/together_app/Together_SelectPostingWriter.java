@@ -1,3 +1,7 @@
+/*
+*개발자 - 박건형, 임성민
+ *개발목적 - 게시글 목록 중 클릭한 게시글이 자신이 작성한 사람이 보게 될 액티비티
+             그룹완료의 기능이 있다.*/
 package com.example.together_app;
 
 import android.content.Intent;
@@ -100,6 +104,10 @@ public class Together_SelectPostingWriter extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        if(TextView_person.getText().toString().equals("제한인원")){
+            Toast.makeText(getApplicationContext(), "유효시간이 지나간 게시글에 접근하였습니다. 다른 게시글에 접근하세요.", Toast.LENGTH_LONG).show();
+        }
+
         //댓글 작성 버튼을 눌렀을때 서버에 작성한 댓글을 넣는다.
         Button_send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,6 +142,7 @@ public class Together_SelectPostingWriter extends AppCompatActivity {
             }
         });
 
+        // 그룹이 완료되었다고 생각되면 버튼을 클릭하여 최종 액티비티로 넘어간다.
         Button_final.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -363,6 +372,5 @@ public class Together_SelectPostingWriter extends AppCompatActivity {
             return output.toString();
         }
     }
-
 
 }

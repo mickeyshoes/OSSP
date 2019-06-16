@@ -1,3 +1,6 @@
+/*
+* 개발자 - 박건형
+* 개발목적 - 각 댓글 아이템 별로 가질 필드 객체 정의*/
 package com.example.together_app;
 
 public class Together_CommentItem {

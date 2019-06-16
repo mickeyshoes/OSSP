@@ -1,3 +1,7 @@
+/*
+* 개발자 - 임성민
+* 개발목적 - url생성을 위함
+* */
 package com.example.together_app;
 
 public class URL_make {

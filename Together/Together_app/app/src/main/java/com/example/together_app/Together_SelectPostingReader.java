@@ -1,3 +1,6 @@
+/*
+* 개발자 - 박건형, 임성민
+* 개발목적 = 게시글을 클릭한 사용자가 보게 될 액티비티, 그룹 참여의 기능이 있다.*/
 package com.example.together_app;
 
 import android.content.Intent;
@@ -96,6 +99,10 @@ public class Together_SelectPostingReader extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        if(TextView_person_join.getText().toString().equals("제한인원")){
+            Toast.makeText(getApplicationContext(), "유효시간이 지나간 게시글에 접근하였습니다. 다른 게시글에 접근하세요.", Toast.LENGTH_LONG).show();
+        }
+
         //댓글 전송후 저장
         Button_send_join.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,6 +137,8 @@ public class Together_SelectPostingReader extends AppCompatActivity {
             }
         });
 
+        //그룹 참여 버튼을 눌렀을 시 실행되게 될 동작
+        //서버에서의 각 반환값으로 어떠한 동작이 실행되게 되는지 사용자에게 알려준다.
         Button joingroup = (Button)findViewById(R.id.Button_final_join);
         joingroup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -428,6 +437,4 @@ public class Together_SelectPostingReader extends AppCompatActivity {
             return output.toString();
         }
     }
-
-
 }

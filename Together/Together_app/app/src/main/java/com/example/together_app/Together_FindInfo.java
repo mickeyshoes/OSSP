@@ -1,3 +1,6 @@
+/*
+* 개발자 - 임성민
+* 개발목적 - 사용자가 분실한 계정정보를 조회할 수 있음*/
 package com.example.together_app;
 
 import android.os.AsyncTask;
@@ -72,7 +75,7 @@ public class Together_FindInfo extends AppCompatActivity {
 
             }
         });
-
+        //비밀번호를 찾는 버튼
         Button findPWbtn = (Button)findViewById(R.id.FindPWBtn);
         findPWbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,7 +108,7 @@ public class Together_FindInfo extends AppCompatActivity {
 
 
     }
-
+    //1번 입력시 ID찾기, 2번 입력시 비밀번호 찾기
     public class Find_Info extends AsyncTask<String, Void, String> {
 
         @Override

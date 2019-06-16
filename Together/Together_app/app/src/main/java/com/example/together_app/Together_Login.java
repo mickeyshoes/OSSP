@@ -1,3 +1,7 @@
+/*
+* 개발자 - 임성민
+* 개발목적 - 회원등록 되어있는 사용자들의 로그인
+* */
 package com.example.together_app;
 
 import android.content.Intent;
@@ -33,6 +37,7 @@ public class Together_Login extends AppCompatActivity {
         pwtext = (EditText) findViewById(R.id.Pwtext);
         Button loginButton = (Button) findViewById(R.id.trylogin);
         Button findButton = (Button) findViewById(R.id.findInfo);
+        //로그인 버튼 클릭 리스너
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,6 +75,7 @@ public class Together_Login extends AppCompatActivity {
             }
         });
 
+        //등록된 회원정보를 찾는 액티비티로 넘어감
         findButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,6 +86,7 @@ public class Together_Login extends AppCompatActivity {
 
     }
 
+    //입력한 정보가 저장되어 있는 정보와 일치하는 작업인지 확인
     public class into_login extends AsyncTask<String, Void, Void> {
 
         @Override

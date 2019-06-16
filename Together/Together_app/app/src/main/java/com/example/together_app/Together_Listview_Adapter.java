@@ -1,3 +1,6 @@
+/*
+*개발자 - 박건형
+*개발목적 - 게시글에 서버에 입력된 정보를 넣어주기 위한 어댑터*/
 package com.example.together_app;
 
 import android.content.Context;
@@ -28,6 +31,7 @@ public class Together_Listview_Adapter extends BaseAdapter {
     }
 
     @Override
+    //postingitem에 있는 값을 각 아이템의 필드마다 해당되는 값 배치
     public View getView(int position, View convertView, ViewGroup parent) {
         final int pos = position;
         final Context context = parent.getContext();
@@ -50,6 +54,7 @@ public class Together_Listview_Adapter extends BaseAdapter {
         return convertView;
     }
 
+    //arraylist에 값 추가
     public void addItem(String departure, String arrival, String limit){
 
         Together_Listview_PostingItem tlp = new Together_Listview_PostingItem(departure, arrival, limit);
