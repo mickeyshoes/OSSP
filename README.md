@@ -20,20 +20,21 @@ Together 사용서
 Android, Java, Xml, Python, Django, Mysql
 
 Android Studio
-1.Together_CommentItem - 댓글 ListView Item 클래스
-2.Together_CommentList_Adapter - 댓글 ListView Adapter 클래스
-3.Together_FindInfo - ID/Pw를 찾는 화면 클래스
-4.Together_Listview - 게시글 목록 클래스
-5.Together_Listview_Adapter - 게시글 목록 ListView Adapter 클래스
-6.Together_Listview_PostingItem - 게시글 목록 ListView Item 클래스
-7.Together_Login ㅡ 로그인 화면 클래스
-8.Together_MatchComplete ㅡ 게시글에 접속인원들이 다 모였을때 게시글 작성자가 택시, 콜밴, 사다리게임을 할 수 있는 버튼이 있는 클래스
-9.Together_Posting - 게시글을 작성하는 클래스
-10.Together_SelectPostingReader - 게시글에 참여하는 사용자들이 보는 게시글 클래스
-11.Together_SelectPostiongWriter - 작성자가 작성한 게시글을 보는 게시글 클래스
-12.Together_SignupMember - 회원가입 페이지
-13.TogetherMainActivity - 회원 가입 및 로그인 버튼이 있는 초기화면
-14.URL_make - 서버의 연결할 주소를 가지는 클래스
+
+1.Together_CommentItem - 댓글 ListView Item 클래스.
+2.Together_CommentList_Adapter - 댓글 ListView Adapter 클래스.
+3.Together_FindInfo - ID/Pw를 찾는 화면 클래스.
+4.Together_Listview - 게시글 목록 클래스.
+5.Together_Listview_Adapter - 게시글 목록 ListView Adapter 클래스.
+6.Together_Listview_PostingItem - 게시글 목록 ListView Item 클래스.
+7.Together_Login ㅡ 로그인 화면 클래스.
+8.Together_MatchComplete ㅡ 게시글에 접속인원들이 다 모였을때 게시글 작성자가 택시, 콜밴, 사다리게임을 할 수 있는 버튼이 있는 클래스.
+9.Together_Posting - 게시글을 작성하는 클래스.
+10.Together_SelectPostingReader - 게시글에 참여하는 사용자들이 보는 게시글 클래스.
+11.Together_SelectPostiongWriter - 작성자가 작성한 게시글을 보는 게시글 클래스.
+12.Together_SignupMember - 회원가입 페이지.
+13.TogetherMainActivity - 회원 가입 및 로그인 버튼이 있는 초기화면.
+14.URL_make - 서버의 연결할 주소를 가지는 클래스.
 
 서버 및 DB
 manage.py가 있는 최상위 app에서 py manager.py runserver 0.0.0.0:포트번호
