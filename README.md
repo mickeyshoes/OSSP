@@ -20,7 +20,6 @@ Together 사용서
 Android, Java, Xml, Python, Django, Mysql
 
 Android Studio
-
 1.Together_CommentItem - 댓글 ListView Item 클래스
 2.Together_CommentList_Adapter - 댓글 ListView Adapter 클래스
 3.Together_FindInfo - ID/Pw를 찾는 화면 클래스
